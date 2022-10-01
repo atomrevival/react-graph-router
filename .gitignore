@@ -1,0 +1,6 @@
+node_modules
+
+/example/.parcel-cache
+/example/dist
+
+.yarn-error.log

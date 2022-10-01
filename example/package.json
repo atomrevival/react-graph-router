@@ -1,0 +1,24 @@
+{
+  "name": "react-graph-router",
+  "version": "0.1.0",
+  "description": "Example project for react-graph-router",
+  "license": "MIT",
+  "source": "src/index.tsx",
+  "scripts": {
+    "build": "parcel build",
+    "start": "tsc && parcel index.html -p 3000"
+  },
+  "dependencies": {
+    "graphology": "^0.25.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.23",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
+    "parcel": "^2.7.0",
+    "process": "^0.11.10",
+    "typescript": "^4.8.4"
+  }
+}
