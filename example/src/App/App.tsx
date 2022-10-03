@@ -99,18 +99,13 @@ export const App = () => {
         graph.setNodeAttribute(node, "label", node);
         graph.setNodeAttribute(node, "size", 15);
         graph.setNodeAttribute(node, "color", "blue");
-
       });
 
       circular.assign(graph);
 
-      const sigma = new Sigma(graph, container, { renderEdgeLabels: true });
-
-      return () => {
-        sigma.clear()
-      }
+      new Sigma(graph, container, { renderEdgeLabels: true });
     }
-  });
+  }, []);
 
   return <div style={{ width: "100wh", height: "100vh" }} ref={divRef} />;
 };
