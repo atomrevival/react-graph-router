@@ -64,20 +64,23 @@ export const App = () => {
       id: Feature.Seven,
       path: "/sju",
       component: <p>SEVEN</p>,
-      segmentId: Segment.Neviim,
     },
   ]);
 
   const divRef = useRef<HTMLDivElement>(null);
 
+  // Gets the whole segment
+  console.log(featureRouter.getSegment({ segmentId: Segment.Pentateuch }))
+
   useEffect(() => {
     const container = divRef.current;
 
+    const graph = featureRouter.graph as Graph<
+      NodeAttributes & { label: string; size: number; color: string }
+    >;
+
     if (container) {
       // Get the copy of the Graph
-      const graph = featureRouter.graph as Graph<
-        NodeAttributes & { label: string; size: number; color: string }
-      >;
 
       // Add edge attributes to be rendered and read by Sigma
       graph.forEachEdge((edge) => {
@@ -86,22 +89,28 @@ export const App = () => {
           "label",
           graph.getNodeAttribute(graph.extremities(edge)[0], "segmentId")
         );
-        graph.setEdgeAttribute(edge, "size", 2);
-        graph.setEdgeAttribute(edge, "color", "#888");
+        graph.setEdgeAttribute(edge, "size", 8);
+        graph.setEdgeAttribute(edge, "type", "arrow");
+        graph.setEdgeAttribute(edge, "color", "#ababab");
       });
 
       // Add node attributes to be rendered and read by Sigma
       graph.forEachNode((node) => {
         graph.setNodeAttribute(node, "label", node);
         graph.setNodeAttribute(node, "size", 15);
-        graph.setNodeAttribute(node, "color", "red");
+        graph.setNodeAttribute(node, "color", "blue");
+
       });
 
       circular.assign(graph);
 
-      new Sigma(graph, container, { renderEdgeLabels: true });
+      const sigma = new Sigma(graph, container, { renderEdgeLabels: true });
+
+      return () => {
+        sigma.clear()
+      }
     }
-  }, []);
+  });
 
   return <div style={{ width: "100wh", height: "100vh" }} ref={divRef} />;
 };

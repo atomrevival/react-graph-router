@@ -155,6 +155,7 @@ export default class GraphRouter<
   /**
    * Lists IDs based on segment or starting node
    */
+  // TODO: Split this function, getSegmentById and getSegmentByNode
   public getSegment({
     segmentId,
     id: nodeId,
@@ -176,7 +177,9 @@ export default class GraphRouter<
       // TODO: Fix logic when segmentId is undefined and nodeId is defined
       if ((!nodeId && segmentId !== undefined) || (!nodeId && !segmentId)) {
         const firstNodeId = this.getHeadNodeId(segmentId);
-        return this.generateSegment(firstNodeId) ?? null;
+        const segment = this.generateSegment(firstNodeId);
+        // TODO: Reimplement this, (hacky implementation)
+        return [firstNodeId, ...segment];
       }
 
       if (nodeId && segmentId === undefined) {
@@ -190,10 +193,10 @@ export default class GraphRouter<
             `"${nodeId}" does not exist in the segment "${segmentId}".`
           );
         }
-        return this.generateSegment(nodeId);
       }
 
-      return this.generateSegment(nodeId);
+      // TODO: Reimplement this, (hacky implementation)
+      return [nodeId, ...this.generateSegment(nodeId)];
     } catch (err) {
       console.error(err);
     }

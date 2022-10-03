@@ -77,12 +77,13 @@ featureRoutes.getSegment({
 });
 // ["user-landing", "products", "contact"]
 
-// Get the whole segment based on node
+// Get the segment based on the node, current implementation is directed edges
 featureRoutes.getSegment({
   nodeId: "login",
 });
-// ["admin-home", "login", "dashboard"]
+// ["login", "dashboard"]
 
+// Gets segment based on node ID and segment ID
 featureRoutes.getSegment({
   segmentId: "admin",
   nodeId: "products",
